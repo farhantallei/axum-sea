@@ -184,6 +184,7 @@ dependencies = [
  "dotenvy",
  "jsonwebtoken",
  "password-hash",
+ "rust_decimal",
  "sea-orm",
  "serde",
  "serde_json",

@@ -34,6 +34,7 @@ async fn main() -> Result<()> {
             get(|| async { Json(HealthResponse { status: "ok" }) }),
         )
         .nest("/api/users", modules::user::user_route::router())
+        .nest("/api/products", modules::product::product_route::router())
         .with_state(state);
 
     let listener = match TcpListener::bind("0.0.0.0:3000").await {

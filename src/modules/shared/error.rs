@@ -84,7 +84,7 @@ impl AppError {
                 StatusCode::INTERNAL_SERVER_ERROR,
                 Json(ErrorResponse {
                     message: "Internal server error".to_string(),
-                    details: None,
+                    details: Some(serde_json::json!({"error": e.to_string()})),
                 }),
             ),
         }

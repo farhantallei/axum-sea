@@ -38,6 +38,7 @@ pub async fn me_handler(
 
 pub async fn find_all_users_handler(
     State(state): State<AppState>,
+    AuthClaims(_claims): AuthClaims,
 ) -> Result<(StatusCode, Json<Vec<GetUsersResponse>>), AppError> {
     let users = UserService::find_all_users(&state.db)
         .await

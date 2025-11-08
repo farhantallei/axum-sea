@@ -1,3 +1,4 @@
+use rust_decimal::Decimal;
 use sea_orm::{ActiveValue::Set, entity::prelude::*};
 use serde::{Deserialize, Serialize};
 use sqlx::types::chrono;
@@ -12,9 +13,9 @@ pub struct Model {
     pub owner_id: i32,
     pub title: String,
     pub content: Option<String>,
-    pub price: f64,
-    pub created_at: DateTimeUtc,
-    pub updated_at: DateTimeUtc,
+    pub price: Decimal,
+    pub created_at: DateTime,
+    pub updated_at: DateTime,
 }
 
 #[derive(Copy, Clone, Debug, EnumIter, DeriveRelation)]
@@ -41,7 +42,7 @@ impl ActiveModelBehavior for ActiveModel {
     where
         C: ConnectionTrait,
     {
-        let current_time = chrono::Utc::now();
+        let current_time = chrono::Utc::now().naive_utc();
         self.updated_at = Set(current_time);
         Ok(self)
     }
